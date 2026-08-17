@@ -1,0 +1,30 @@
+{
+  "suite": "complex-network-research-skill-suite",
+  "version": "2.0",
+  "installation_model": "symlink",
+  "custom_skills": [
+    "complex-network-research-taste",
+    "complex-network-idea-pipeline"
+  ],
+  "recommended_upstreams": {
+    "Microsoft ResearchStudio": [
+      "idea-spark",
+      "paper-search",
+      "scoop-check"
+    ],
+    "ARIS": [
+      "idea-discovery",
+      "idea-creator",
+      "novelty-check",
+      "research-review",
+      "research-refine-pipeline"
+    ]
+  },
+  "scripts": [
+    "bootstrap.sh",
+    "install_custom_symlinks.sh",
+    "register_aris_project.sh",
+    "update_all.sh",
+    "doctor.sh"
+  ]
+}

@@ -1,0 +1,6 @@
+# One absolute project path per line.
+# Lines beginning with # are ignored.
+#
+# Example:
+# /Users/yourname/Research/complex-network-project
+# /Users/yourname/Research/hypergraph-resilience
