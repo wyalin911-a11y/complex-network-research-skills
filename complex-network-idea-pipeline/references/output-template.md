@@ -1,139 +1,130 @@
-# Final Output Template
+# Idea Decision Report Template
 
-# Complex Network Research Idea Report
+Use this template only after all required upstream artifacts pass the input gate.
 
-## Research Landscape
-A concise synthesis of the current field, not a bibliography dump.
+```yaml
+decision: APPROVE | REVISE | REJECT | BLOCKED
+decision_code: PASS | REVISION_REQUIRED | PRIOR_ART_COLLISION | KILL_TEST_FAILED | BLOCKED_MISSING_STAGE | BLOCKED_INCONSISTENT_INPUT | BLOCKED_UNTRACEABLE_EVIDENCE
+idea_id: ""
+current_state: IDEA_VALIDATED
+next_state: IDEA_APPROVED | IDEA_SCREENED | IDEA_VALIDATED | IDEA_REJECTED | UNCHANGED
+top_rank: null
+scientific_maturity: L0 | L1 | L2 | L3 | L4 | null
+kill_test_status: PASS | FAIL | REDESIGN_REQUIRED | NOT_RUN
+prior_art_severity: LOW | MEDIUM | HIGH | UNKNOWN
+main_risk_level: LOW | MEDIUM | HIGH
+missing_artifacts: []
+input_artifacts:
+  ideaspark: ""
+  research_taste: ""
+  aris_validation: ""
+decided_at: YYYY-MM-DDTHH:MM:SSZ
+```
+
+# Complex Network Idea Decision Report
+
+## Committee Decision
+
+- **Decision:**
+- **Decision code:**
+- **Current state:**
+- **Next state:**
+- **Reason:**
+- **Exact next action:**
+
+## Input Gate
+
+| Required artifact | Path or identifier | Candidate version | Status | Notes |
+| --- | --- | --- | --- | --- |
+| IdeaSpark candidates |  |  | PASS / FAIL |  |
+| Research Taste screening |  |  | PASS / FAIL |  |
+| ARIS novelty/reviewer validation |  |  | PASS / FAIL |  |
+
+If any row fails, stop here and return `BLOCKED`.
+
+## Comparative Decision Matrix
+
+| Rank | Candidate ID | Mechanism | Maturity | Prior-art risk | Kill Test | Feasibility | Main risk | Decision |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 |  |  |  |  |  |  |  |  |
+| 2 |  |  |  |  |  |  |  |  |
+| 3 |  |  |  |  |  |  |  |  |
 
 ## Finalists
 
-### Idea 1 — [Short Scientific Title]
+### Candidate — `[candidate_id]`
 
-**One-sentence discovery hypothesis**
+#### Discovery hypothesis
 
-[One precise sentence.]
+Label the statement `HYPOTHESIZED` unless upstream evidence establishes it.
 
-#### Research Question
-[Exact scientific question.]
+#### Evidence synthesis
 
-#### What is known
-[Evidence-grounded current literature.]
+- **KNOWN:**
+- **INFERRED:**
+- **HYPOTHESIZED:**
+- **NEEDS_VERIFICATION:**
 
-#### Literature Gap
-[Specific unresolved issue.]
+#### Why this is or is not A+B
 
-#### Closest Prior Work
-1. [Paper] — overlap / difference
-2. [Paper] — overlap / difference
-3. [Paper] — overlap / difference
+Use the Research Taste artifact; do not recreate the screening.
 
-#### Core Mechanism
-[Mechanism and why it is scientifically justified.]
+#### Closest prior work and collision risk
 
-#### Why This Is Not A+B
-[Explicit argument.]
+Use the ARIS artifact and preserve its source identifiers.
 
-#### Expected Emergent Phenomenon
-Label as HYPOTHESIS.
+#### Limiting dimension
 
-#### Theory Route
-[Equations / analysis that may be possible.]
-
-#### Simulation Route
-- network models
-- system sizes
-- parameters
-- observables
-- baselines
-- finite-size checks
-
-#### Empirical Route
-[Only if relevant; do not invent datasets.]
+State the single dimension that most constrains the candidate.
 
 #### Kill Test
-- minimal setup:
-- observable:
-- success signal:
-- failure signal:
-- estimated effort:
 
-#### Expected Contribution if Successful
-[What becomes newly known.]
+- Minimal setup:
+- Observable:
+- Success signal:
+- Failure signal:
+- Estimated effort:
+- Stop rule:
+- Status:
 
-#### Main Scientific Risk
-[Single biggest risk.]
+#### Theory and evidence obligations
 
-#### Scientific Maturity
-[L0/L1/L2/L3/L4] — [why]
+| Evidence lane | Requirement | Current status | Approval implication |
+| --- | --- | --- | --- |
+| Theory | required / optional / not_applicable |  |  |
+| Simulation | required / optional / not_applicable |  |  |
+| Empirical | required / optional / not_applicable |  |  |
 
-#### Upgrade Path
-[Concrete milestone to the next maturity level.]
+#### Scientific maturity and journal fit
 
-#### Scores
-| Dimension | Score |
-|---|---:|
-| Novelty | x/10 |
-| Mechanistic depth | x/10 |
-| Theoretical depth | x/10 |
-| Analytical tractability | x/10 |
-| Emergent-phenomenon potential | x/10 |
-| Surprise | x/10 |
-| Generality | x/10 |
-| Empirical testability | x/10 |
-| Engineering/management relevance | x/10 |
-| Feasibility | x/10 |
-| Reproducibility | x/10 |
-| Narrative clarity | x/10 |
-| Trivial-extension risk | x/10 |
-| Prior-art collision risk | x/10 |
+Keep maturity and journal fit separate. State the strongest plausible current style and
+the evidence gap to the next target.
 
-Scientific risk: Low / Medium / High
+#### Unresolved reviewer objection
 
-#### Journal Fit
-| Journal | Fit |
-|---|---:|
-| PRE | x/10 |
-| Chaos | x/10 |
-| Chaos, Solitons & Fractals | x/10 |
-| RESS | x/10 |
-| Communications Physics | x/10 |
-| PRL | x/10 |
-| PNAS | x/10 |
-| Science Advances | x/10 |
-| Nature Communications | x/10 |
-| Nature | x/10 |
-| Science | x/10 |
+State the strongest objection that remains after upstream validation.
 
-**Best current target:** [journal/style]
+#### Upgrade path
 
----
+Specify the next falsifiable milestone, not a generic request for more work.
 
-Repeat for Idea 2 and Idea 3.
+## Portfolio Labels
 
-## Final Ranking
+- **Best balance:**
+- **Highest ceiling:**
+- **Safest project:**
+- **Most PRL-like:**
+- **Most RESS-like:**
+- **Most Nature-Communications-like:**
 
-1. Idea ...
-2. Idea ...
-3. Idea ...
+Omit a label when no candidate credibly fits it.
 
-### Best Balance
-[...]
+## Decision Audit
 
-### Highest Ceiling
-[...]
-
-### Safest Project
-[...]
-
-### Most PRL-like
-[...]
-
-### Most RESS-like
-[...]
-
-### Most Nature-Communications-like
-[...]
-
-## Recommended First Move
-
-State the single cheapest next calculation/search/simulation to perform tomorrow.
+- [ ] All three required upstream artifacts are present.
+- [ ] Candidate IDs and versions match.
+- [ ] Every decision-relevant claim is traceable.
+- [ ] Missing evidence was not silently reconstructed.
+- [ ] Kill Tests include stop rules.
+- [ ] Maturity and journal fit remain separate.
+- [ ] Approval does not authorize manuscript writing.

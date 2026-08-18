@@ -1,13 +1,25 @@
-# Complex Network Research Skill Suite v2
+# Complex Network Research Skill Suite v3
 
 A modular Codex research-idea system for complex networks, Management Science & Engineering,
 reliability/resilience, cascading failures, percolation, hypergraphs, multilayer/interdependent
 networks, threshold dynamics, infrastructure systems, supply chains, and systemic risk.
 
-## What changed in v2
+## What changed in v3
 
-v2 replaces copied custom-skill installation with **symlink installation** and adds a
-single-command updater.
+v3 turns `complex-network-idea-pipeline` into a **final research decision gate**.
+It no longer generates ideas, runs literature search, substitutes for domain screening,
+or silently reconstructs ARIS validation. It requires three completed upstream artifacts:
+
+1. IdeaSpark candidates;
+2. Complex Network Research Taste screening;
+3. ARIS novelty/reviewer validation.
+
+Missing input now produces `BLOCKED_MISSING_STAGE`: **NO INPUT = NO DECISION**.
+The output includes a machine-readable decision, Kill Tests, comparative risk, Top-3
+ranking when justified, and an `APPROVE` / `REVISE` / `REJECT` / `BLOCKED` verdict.
+
+v2 replaced copied custom-skill installation with **symlink installation** and added a
+single-command updater. v3 keeps that model.
 
 The intended update model is now:
 
@@ -35,22 +47,24 @@ complex-network-research-taste
         ↓
 domain scientific taste + L1–L4 maturity + journal fit
 
-ARIS idea-discovery family
+ARIS validation components
         ↓
 novelty verification + reviewer attack + refinement
 
 complex-network-idea-pipeline
         ↓
-orchestration + Kill Test + Top-3 research blueprints
+final decision gate + Kill Test + Top-3 + state decision
 ```
 
 The two custom skills in this package do **not** duplicate IdeaSpark or ARIS.
-They cooperate with those upstream projects.
+`complex-network-research-taste` screens candidates; `complex-network-idea-pipeline`
+consumes completed upstream artifacts and makes the final decision. An external workflow
+controller, such as a project's `AGENTS.md`, owns stage routing and state transitions.
 
 ## Files
 
 ```text
-complex-network-research-skill-suite-v2/
+complex-network-research-skill-suite-v3/
 ├── README.md
 ├── UPGRADE_NOTES.md
 ├── bootstrap.sh
@@ -82,8 +96,8 @@ Keep this folder in a stable location, for example:
 
 ```bash
 mkdir -p ~/.local/share/research-tools
-mv ~/Downloads/complex-network-research-skill-suite-v2 \
-   ~/.local/share/research-tools/complex-network-research-skills
+mv ~/Downloads/complex-network-research-skill-suite-v3 \
+  ~/.local/share/research-tools/complex-network-research-skills
 ```
 
 Then:
@@ -198,12 +212,12 @@ your GitHub repository
         ↓ git pull
 ~/.local/share/research-tools/complex-network-research-skills
         ↓ symlink
-~/.codex/skills/complex-network-research-taste
-~/.codex/skills/complex-network-idea-pipeline
+~/.agents/skills/complex-network-research-taste
+~/.agents/skills/complex-network-idea-pipeline
 ```
 
 After that, edits committed to your GitHub repository can be obtained with `git pull`;
-no manual copying to `~/.codex/skills` is necessary.
+no manual copying to `$HOME/.agents/skills` is necessary.
 
 # Scientific maturity model
 
@@ -239,10 +253,13 @@ A strong engineering reliability contribution can have high RESS fit and lower P
 # Suggested prompts
 
 ```text
-Use complex-network-idea-pipeline in deep mode.
-My direction is cascading failures in higher-order networks.
-Generate at least 20 internal candidates and return only the strongest Top 3.
-Require at least L1 maturity and credible L2 upgrade potential.
+Use complex-network-idea-pipeline as the final decision gate.
+Inputs:
+- IdeaSpark candidates: /path/to/IDEASPARK_CANDIDATES.md
+- Research Taste screening: /path/to/TASTE_SCREENING.md
+- ARIS validation: /path/to/ARIS_VALIDATION.md
+Return an input-gate verdict, Kill Tests, comparative risk, Top 3 if justified,
+and one APPROVE/REVISE/REJECT/BLOCKED decision.
 ```
 
 ```text
@@ -253,8 +270,9 @@ assign maturity, and score journal fit.
 ```
 
 ```text
-Use complex-network-idea-pipeline in PRL mode.
-Prefer conceptual simplicity, analytical tractability, and one clear new phenomenon.
+Use complex-network-idea-pipeline to compare these completed upstream artifacts.
+Apply a PRL-style benchmark, but do not change IDEA_VALIDATED to IDEA_APPROVED unless
+all required inputs are traceable and the Kill Test is decisive.
 ```
 
 # Update semantics in one sentence

@@ -2,8 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CODEX_HOME_DIR="${CODEX_HOME:-$HOME/.codex}"
-DEST="${CODEX_SKILLS_DIR:-$CODEX_HOME_DIR/skills}"
+DEST="${CODEX_SKILLS_DIR:-$HOME/.agents/skills}"
 
 mkdir -p "$DEST"
 

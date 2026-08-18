@@ -1,318 +1,200 @@
 ---
 name: complex-network-idea-pipeline
 description: >
-  Run an end-to-end research idea discovery and evolution workflow for complex networks,
-  network science, management science & engineering, reliability/resilience, cascading
-  failures, percolation, hypergraphs, multilayer/interdependent networks, and related
-  complex systems. Use when the user asks to find strong research ideas, find a thesis
-  direction, run deep/top-journal ideation, compare candidate ideas, or produce a
-  literature-grounded Top-3 research blueprint with novelty checks, reviewer attacks,
-  Kill Tests, maturity levels, journal fit, and upgrade paths.
+  Make a final decision among complex-network research candidates only after
+  receiving completed IdeaSpark candidates, Complex Network Research Taste
+  screening, and ARIS novelty/reviewer validation reports. Use for Kill Tests,
+  comparative risk assessment, Top-3 selection, and APPROVE/REVISE/REJECT
+  decisions. Do not generate missing upstream evidence or run upstream stages.
 ---
 
 # Complex Network Idea Pipeline
 
-## Mission
+## Hard role contract
 
-Act as the research director.
+`ROLE = FINAL_RESEARCH_DECISION_GATE`
 
-Coordinate creative ideation, domain-specific scientific taste, prior-art checking,
-reviewer attack, and refinement.
+Act as a research committee that receives completed upstream evidence and makes a
+traceable portfolio decision.
 
-The goal is not to output many clever-sounding topics. The goal is to identify the
-small number of research directions with the highest expected scientific value.
+This skill is not:
 
-## Preferred skill team
+- an idea generator;
+- a literature-survey skill;
+- a domain-taste substitute;
+- a novelty-search substitute;
+- a reviewer-generation substitute;
+- an upstream workflow orchestrator;
+- a paper-writing or project-initialization skill.
 
-When installed and available, use the following division of labor:
+Do not invoke, reconstruct, simulate, infer, or silently replace a missing upstream
+stage.
 
-1. `idea-spark` — literature-grounded creative ideation and bottleneck diagnosis.
-2. `paper-search` / `scoop-check` — ResearchStudio literature and prior-art support.
-3. `complex-network-research-taste` — domain-specific scientific judgment.
-4. ARIS idea-discovery family — deep novelty verification, reviewer attack, refinement.
-5. this skill — orchestration, Kill Tests, final ranking, and idea evolution.
+**NO INPUT = NO DECISION.**
 
-ARIS skills of particular interest:
-- `idea-discovery`
-- `idea-creator`
-- `novelty-check`
-- `research-review`
-- `research-refine-pipeline`
+## Required inputs
 
-Do not duplicate an upstream workflow when it is already available and appropriate.
+Require all three artifacts:
 
-If an upstream skill is unavailable, continue with an internal equivalent workflow and
-clearly mark which validation stage was not independently delegated.
+1. **IdeaSpark candidate artifact**
+   - stable candidate IDs;
+   - candidate questions, bottlenecks, assumptions, and opportunity lenses;
+   - provenance for supplied literature or context;
+   - explicit `KNOWN`, `INFERRED`, `HYPOTHESIZED`, and `NEEDS_VERIFICATION` labels.
+2. **Complex Network Research Taste screening artifact**
+   - the same stable candidate IDs;
+   - A+B or trivial-extension assessment;
+   - mechanism, emergent-phenomenon, theory-potential, maturity, feasibility, and
+     journal-fit judgments;
+   - eliminated candidates and reasons.
+3. **ARIS novelty/reviewer validation artifact**
+   - the same stable candidate IDs for every finalist;
+   - recent prior-art search coverage and closest works;
+   - overlap and difference axes;
+   - prior-art collision risk;
+   - reviewer attack and unresolved objections;
+   - validation limits and confidence.
 
-## Context discipline
+Accept paths, wikilinks, or pasted artifacts. Preserve the supplied source identifiers
+in the final report.
 
-If the user provides local papers, a literature folder, a reference paper, an existing
-model, code, or preliminary results, inspect those first and treat them as primary
-research context.
+## Input gate
 
-Do not ignore existing work and rediscover it from scratch.
+Before scientific ranking, verify:
 
-## Default mode
+- every artifact is present and readable;
+- candidate IDs match across artifacts;
+- each finalist has both domain screening and ARIS validation;
+- claims are traceable to the supplied artifacts;
+- no upstream artifact is stale relative to a materially revised candidate;
+- missing evidence is not being presented as negative evidence.
 
-Unless otherwise requested:
+Return one of these blocking codes without ranking candidates:
 
-- literature horizon: recent 3–5 years + foundational papers
-- internal idea seeds: at least 20
-- finalists returned: 3
-- minimum maturity target: L1
-- preference: ideas with credible L2 upgrade path
-- research risk: balanced
-- output language: Chinese, with technical English where clearer
+- `BLOCKED_MISSING_STAGE` — one or more required artifacts are absent;
+- `BLOCKED_INCONSISTENT_INPUT` — candidate IDs, versions, or claims conflict;
+- `BLOCKED_UNTRACEABLE_EVIDENCE` — essential judgments lack a source path or record.
 
-## Deep Mode
+List exactly what is missing or inconsistent. Do not change the idea state while
+blocked.
 
-Activate when the user says:
-- deep mode
-- 顶刊模式
-- PRL-level
-- Nature-level
-- 最强 idea
-- 认真找一个 idea
+## Decision procedure
 
-Deep Mode requires:
-- broader literature search
-- multiple ideation lenses
-- aggressive prior-art search
-- domain taste filtering
-- independent reviewer attack when possible
-- explicit top-journal benchmarking
-- Kill Test for each finalist
-- no 9+/10 novelty score without evidence
+### 1. Normalize the finalist set
 
-Prefer 3 excellent ideas over 20 mediocre ones.
+Build a comparison table keyed by candidate ID. Do not merge candidates only because
+their titles sound similar. Preserve upstream eliminations as decision context.
 
-## Stage 0 — Research brief
+### 2. Identify the limiting dimension
 
-Extract:
+For each candidate, identify the single most important limitation among:
 
-- exact scientific area
-- user's existing models/papers/results
-- preferred theory vs simulation vs empirical balance
-- available compute/data
-- time horizon
-- target scientific style
-- non-goals
+- novelty;
+- mechanistic depth;
+- theoretical tractability;
+- emergent-phenomenon potential;
+- prior-art collision;
+- falsifiability;
+- feasibility;
+- generality;
+- empirical or engineering relevance;
+- evidence quality.
 
-If noncritical constraints are absent, proceed with explicit reasonable defaults.
+Do not hide a fatal weakness inside an average score.
 
-## Stage 1 — Literature landscape
+### 3. Run the Kill Test review
 
-Build:
+Require a cheapest decisive test for each finalist:
 
-**Problem → Existing models → Mechanisms → Phenomena → Theory → Limitations → Open tensions**
+- minimal setup;
+- observable;
+- success signal;
+- failure signal;
+- estimated effort;
+- stop rule.
 
-Search recent literature with multiple query formulations.
+If the proposed test cannot falsify the headline mechanism, return `REVISE` for that
+candidate.
 
-Identify:
-- recurring assumptions
-- unresolved contradictions
-- limitations repeated across papers
-- common approximations
-- mechanisms studied independently but not jointly
-- claims that may fail under higher-order/correlated/temporal structure
+### 4. Reconcile maturity and journal fit
 
-Do not infer novelty from keyword absence alone.
+Treat scientific maturity and journal fit as separate axes. Use the upstream Research
+Taste maturity judgment as an input, then recalibrate only when ARIS evidence changes
+the basis for that judgment.
 
-## Stage 2 — Candidate generation
+Never infer that L2 automatically means PRL, L3 means Nature Communications, or L4
+guarantees a general-science venue.
 
-Generate at least 20 internal seeds using multiple lenses:
+### 5. Benchmark the finalists
 
-- assumption breaking
-- competing mechanisms
-- correlated heterogeneity
-- local–global mismatch
-- approximation failure
-- control paradox
-- higher-order interactions
-- time-scale competition
-- endogenous adaptation
-- theory–decision bridge
+Compare conceptual ambition, mechanism, theory, validation burden, and scope against
+the closest strong-paper family identified upstream. Use calibrated language such as:
 
-When `idea-spark` is available, use it as a high-quality creative generator rather than
-replacing it with generic brainstorming.
+- potentially competitive if verified;
+- PRL-style scientific punch;
+- strong RESS-style contribution;
+- currently below Nature Communications evidence breadth;
+- conceptually ambitious but high-risk.
 
-Do not show all seeds unless requested.
+Never claim superiority to a journal's published papers from an untested idea.
 
-## Stage 3 — Domain taste filter
+### 6. Make the committee decision
 
-Use `complex-network-research-taste`.
+Use exactly one decision:
 
-Remove ideas dominated by:
-- A+B novelty
-- topology substitution
-- parameter addition
-- curve-shift results
-- unmotivated hypergraphs
-- decorative optimization
-- low theoretical or mechanistic content
+- `APPROVE` — at least one candidate is worth formal research investment;
+- `REVISE` — promising, but a specified upstream correction or Kill Test redesign is
+  required before approval;
+- `REJECT` — the candidate is dominated by prior art, triviality, infeasibility, or a
+  failed decisive test;
+- `BLOCKED` — required upstream evidence is missing or inconsistent.
 
-Keep ideas whose new mechanism plausibly causes qualitatively new behavior.
+An approval authorizes project initialization and research planning only. It does not
+authorize manuscript claims or paper writing.
 
-## Stage 4 — First literature collision check
+## State-transition contract
 
-For the surviving pool, identify:
-- closest prior paper
-- overlap axis
-- difference axis
-- collision risk
+Apply these transitions only when the caller supplies a canonical idea state:
 
-If `scoop-check` or ARIS `novelty-check` is available, use it.
+| Decision | Current state | Next state |
+| --- | --- | --- |
+| `APPROVE` | `IDEA_VALIDATED` | `IDEA_APPROVED` |
+| `REVISE` | `IDEA_VALIDATED` | `IDEA_SCREENED` or `IDEA_VALIDATED`, with reason |
+| `REJECT` | Any idea-stage state | `IDEA_REJECTED` |
+| `BLOCKED` | Any | unchanged |
 
-Do not kill a candidate merely because related work exists. Kill it when the core novelty
-claim is already covered.
+Do not create a paper project, move an idea card, or start downstream paper skills.
+Those actions belong to the external workflow controller after it records the decision.
 
-## Stage 5 — Reviewer attack
+## Required output
 
-For the strongest 5–8 candidates, attack:
+Load `references/output-template.md` and produce one `IDEA_DECISION_REPORT.md` or the
+caller-specified equivalent.
 
-- Why is this not trivial?
-- Is the effect obvious?
-- Does the new mechanism matter?
-- Could existing theory already predict it?
-- Is it one tuned parameter point?
-- Is the engineering meaning real?
-- Is the model unnecessarily complex?
+The report must contain:
 
-Use ARIS `research-review` when available.
+1. a machine-readable decision block;
+2. an input-completeness table;
+3. comparative finalist analysis;
+4. Kill Tests and stop rules;
+5. Top-3 ranking when at least three viable candidates exist;
+6. explicit main risk and unresolved objection for every finalist;
+7. a single committee decision and next state;
+8. the exact next action.
 
-## Stage 6 — Theory-potential check
+If fewer than three candidates are viable, return the viable set and state why the
+report does not contain a full Top 3. Never pad the ranking with weak ideas.
 
-For each remaining candidate, ask what can be derived:
+## Integrity rules
 
-- cavity/message-passing equations
-- generating functions
-- self-consistency equations
-- stability conditions
-- bifurcation boundaries
-- critical/tricritical conditions
-- scaling
-- exact limiting cases
+- Preserve `KNOWN`, `INFERRED`, `HYPOTHESIZED`, and `NEEDS_VERIFICATION` labels.
+- Do not fabricate citations, search coverage, reviewer independence, theory results,
+  simulation outcomes, or empirical evidence.
+- Do not treat an absent collision as proof of novelty.
+- Do not expose hidden chain-of-thought; provide concise decision reasons and evidence
+  references.
+- Do not approve an idea only because it sounds ambitious.
+- Do not silently repair upstream work inside this gate.
 
-Prefer candidates where a new phenomenon has a plausible explanation, not only a plot.
-
-## Stage 7 — Kill Test
-
-Design the cheapest falsification test.
-
-Examples:
-- solve a one-dimensional fixed-point equation
-- continuation of a control-parameter branch
-- small simulation at N≈10^4
-- remove the proposed mechanism
-- compare two network ensembles
-- inspect finite-size behavior near the predicted transition
-
-A Kill Test must specify:
-- minimal setup
-- observable
-- success signal
-- failure signal
-- estimated effort
-
-If the idea fails cheaply, recommend stopping early.
-
-## Stage 8 — Scientific maturity + journal fit
-
-Use `complex-network-research-taste`.
-
-Assign:
-
-- L0 — Below strong-paper threshold
-- L1 — Strong Publishable Research
-- L2 — New Discovery
-- L3 — General Mechanism
-- L4 — Broad Scientific Significance
-
-Then separately score journal fit.
-
-Never convert maturity directly into a journal recommendation.
-
-## Stage 9 — Top-journal benchmark
-
-For the Top 3, compare conceptual ambition with recent strong papers in the closest area.
-
-Ask:
-- Is the mechanism equally deep?
-- Is the discovery equally surprising?
-- Is the theory equally convincing?
-- Is the evidence equally broad?
-- What is the biggest gap?
-
-Use calibrated language:
-- potentially competitive if verified
-- PRL-style scientific punch
-- strong RESS-style contribution
-- currently below Nature Communications evidence breadth
-- conceptually ambitious but high-risk
-
-Never say "better than Nature papers" based only on an idea.
-
-## Stage 10 — Idea Evolution
-
-For each finalist, provide the next maturity upgrade.
-
-Examples:
-- L1 → L2: discover and explain a new phase/critical phenomenon
-- L2 → L3: prove generality across ensembles and finite size
-- L3 → L4: establish a cross-domain general principle with strong evidence
-
-## Stage 11 — Final ranking
-
-Return Top 3.
-
-Also identify:
-- Best balance
-- Highest ceiling
-- Safest project
-- Most PRL-like
-- Most RESS-like
-- Most Nature-Communications-like
-
-These may be different ideas.
-
-## Expected-value rule
-
-Prefer:
-
-Novelty 8.5 / Feasibility 8.5 / Generality 8
-
-over:
-
-Novelty 9.8 / Feasibility 2 / Generality unknown
-
-unless the user explicitly wants high-risk/high-reward research.
-
-## Required final format
-
-Load `references/output-template.md`.
-
-Each idea must clearly distinguish:
-
-- KNOWN
-- INFERRED
-- HYPOTHESIZED
-- NEEDS VERIFICATION
-
-Do not expose hidden chain-of-thought.
-
-## Final integrity gate
-
-Before recommending an idea, verify:
-
-- literature checked?
-- nearest prior work identified?
-- mechanism not decorative?
-- predicted phenomenon falsifiable?
-- theory route plausible?
-- Kill Test defined?
-- generality considered?
-- maturity separate from journal fit?
-- scientific risk stated?
-- worth months of research effort?
-
-If several answers are no, do not recommend the idea.
+Before finalizing, confirm that every decision-relevant claim points to one of the
+three required upstream artifacts.

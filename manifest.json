@@ -1,7 +1,8 @@
 {
   "suite": "complex-network-research-skill-suite",
-  "version": "2.0",
+  "version": "3.0",
   "installation_model": "symlink",
+  "workflow_model": "external-controller-with-final-decision-gate",
   "custom_skills": [
     "complex-network-research-taste",
     "complex-network-idea-pipeline"
@@ -13,7 +14,6 @@
       "scoop-check"
     ],
     "ARIS": [
-      "idea-discovery",
       "idea-creator",
       "novelty-check",
       "research-review",
