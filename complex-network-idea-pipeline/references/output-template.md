@@ -12,6 +12,11 @@ top_rank: null
 scientific_maturity: L0 | L1 | L2 | L3 | L4 | null
 kill_test_status: PASS | FAIL | REDESIGN_REQUIRED | NOT_RUN
 prior_art_severity: LOW | MEDIUM | HIGH | UNKNOWN
+novelty_gate: PASS | REVISE | UNKNOWN
+simplicity_gate: PASS | REVISE | UNKNOWN
+surprise_gate: PASS | REVISE | UNKNOWN
+explicit_solution_gate: PASS | REVISE | UNKNOWN
+explicit_solution_class: closed_form | explicit_asymptotic | exact_implicit | numerical_only | unknown
 main_risk_level: LOW | MEDIUM | HIGH
 missing_artifacts: []
 input_artifacts:
@@ -44,11 +49,11 @@ If any row fails, stop here and return `BLOCKED`.
 
 ## Comparative Decision Matrix
 
-| Rank | Candidate ID | Mechanism | Maturity | Prior-art risk | Kill Test | Feasibility | Main risk | Decision |
-| ---: | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 |  |  |  |  |  |  |  |  |
-| 2 |  |  |  |  |  |  |  |  |
-| 3 |  |  |  |  |  |  |  |  |
+| Rank | Candidate ID | Mechanism | Four gates | Maturity | Prior-art risk | Kill Test | Feasibility | Main risk | Decision |
+| ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 |  |  |  |  |  |  |  |  |  |
+| 2 |  |  |  |  |  |  |  |  |  |
+| 3 |  |  |  |  |  |  |  |  |  |
 
 ## Finalists
 
@@ -76,6 +81,15 @@ Use the ARIS artifact and preserve its source identifiers.
 #### Limiting dimension
 
 State the single dimension that most constrains the candidate.
+
+#### Four-gate audit
+
+| Gate | Status | Evidence or reason |
+| --- | --- | --- |
+| Novelty | PASS / REVISE |  |
+| Simplicity | PASS / REVISE |  |
+| Surprise | PASS / REVISE |  |
+| Explicit analytics | PASS / REVISE | Target quantity, solution class, and derivation route |
 
 #### Kill Test
 
@@ -127,4 +141,6 @@ Omit a label when no candidate credibly fits it.
 - [ ] Missing evidence was not silently reconstructed.
 - [ ] Kill Tests include stop rules.
 - [ ] Maturity and journal fit remain separate.
+- [ ] Novelty, simplicity, surprise, and explicit analytics were each checked independently.
+- [ ] The explicit result is not merely a finite sum followed by numerical root-finding.
 - [ ] Approval does not authorize manuscript writing.

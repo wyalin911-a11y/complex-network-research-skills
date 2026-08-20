@@ -58,6 +58,24 @@ The decisive question is:
 
 If there is no strong answer, novelty is probably weak.
 
+For this user's default research portfolio, prefer ideas that pass four gates together:
+
+1. **Novelty** — the mechanism or discovery survives a serious closest-work comparison.
+2. **Simplicity** — one dominant new mechanism, minimal bespoke machinery, and a causal
+   explanation understandable before the equations.
+3. **Surprise** — at least one qualitative result is not directly encoded by the rule and
+   would not be the reviewer's default prediction.
+4. **Explicit analytics** — at least one central result supporting the contribution admits
+   an explicit analytical expression, not only an implicit equation solved numerically.
+
+Treat failure of any gate as `REVISE` by default unless the user explicitly relaxes it.
+
+Technical completeness is not scientific quality. A model can have correct derivations,
+successful ablations, many robustness checks, and a polished narrative while still being
+too contrived, assumption-bound, or scientifically unmotivated to deserve months of work.
+Evaluate the idea itself again after reviewing its evidence; do not let sunk work or the
+number of completed validations inflate the verdict.
+
 ## Reference loading
 
 Load only what is needed:
@@ -66,6 +84,8 @@ Load only what is needed:
 - `references/weak-novelty-patterns.md` for trivial-extension checks.
 - `references/research-patterns.md` for upgrade paths and mechanism lenses.
 - `references/journals.md` for journal-fit scoring.
+- `references/scientific-elegance-rubric.md` when model naturalness, assumption burden,
+  parsimony, analytical design, or reverse-engineering risk could change the verdict.
 
 Do not bulk-load all references for a narrow task.
 
@@ -150,6 +170,13 @@ The mechanism survives attacks on generality:
 
 A single tuned parameter point is not L3.
 
+Extensive validation inside one model class does not establish claims beyond that class.
+Do not penalize random hypergraphs, annealed ensembles, regular structures, or independence
+closures merely because they simplify analysis. Judge whether the selected model class is
+scientifically meaningful for the stated question and whether the claims remain inside its
+declared scope. Custom response functions chosen to create the target phenomenon still
+require an independent mechanism justification.
+
 ### L4 — Broad Scientific Significance
 
 Ask:
@@ -196,11 +223,17 @@ Score 0–10:
 10. Feasibility
 11. Reproducibility
 12. Narrative clarity
+13. Mechanism naturalness
+14. Model parsimony
+15. Assumption realism
+16. Tractability-goal alignment
 
 Also score:
 
 - Trivial-extension risk: 0–10
 - Prior-art collision risk: 0–10
+- Reverse-engineering risk: 0–10
+- Restrictive-assumption dependency: 0–10
 - Scientific risk: Low / Medium / High
 
 Do not average every number into one opaque score. Explain the limiting dimension.
@@ -225,6 +258,69 @@ Ask whether M causes a qualitative difference:
 
 If M only shifts a curve quantitatively, downgrade novelty unless that shift solves an
 important engineering or scientific problem.
+
+A successful ablation establishes causal sufficiency inside the proposed model. It does
+not by itself establish that the mechanism is natural, scientifically necessary, or worth
+studying. Ask whether the rule would have been proposed before the desired phenomenon was
+observed, and whether an independently motivated simpler rule produces the same effect.
+
+## Scientific naturalness and construction audit
+
+For any idea with custom response functions, special topology dynamics, several nested
+thresholds, or exact-solvability assumptions, read
+`references/scientific-elegance-rubric.md` and audit:
+
+1. What empirical observation, behavioral principle, physical constraint, or accepted
+   microscopic process requires each nonstandard rule?
+2. Is the main ensemble scientifically central, or was it selected mainly to close the
+   equations?
+3. Are endpoint normalizations, smoothing functions, thresholds, and extra parameters
+   independently justified, or do they collectively manufacture the headline result?
+4. Does the phenomenon survive a simpler rule and a less convenient structural setting?
+5. Can the mechanism be explained in one short causal chain without first presenting the
+   equations?
+
+If the honest causal chain is "choose function A to create the lower boundary and function
+B to create the upper boundary," classify the idea as engineered until an external
+scientific reason explains why A and B must coexist.
+
+Do not confuse a mathematically valid phenomenological model with a naturally motivated
+mechanism. Both can be publishable, but they deserve different novelty and maturity scores.
+
+## Tractability reality check
+
+In general, analytical tractability does not require elementary closed-form roots. Exact
+implicit self-consistency equations, stability criteria, asymptotic laws, rigorous bounds,
+and bifurcation conditions can all be strong theory. For this user's default idea selection,
+however, an exact implicit equation alone does not pass the explicit-analytics gate.
+
+However, judge tractability against the stated research goal:
+
+- If the project requires explicit critical thresholds, estimate the algebraic degree or
+  dimensionality before promising them.
+- If exact closure depends on a particular random-graph or random-hypergraph ensemble, state
+  that scope clearly. Do not require a static, quenched, heterogeneous, or empirical extension
+  unless the intended claim actually extends beyond the chosen ensemble.
+- If a nested discrete expectation is explicit as a finite sum but its fixed points require
+  numerical roots, call it an exact implicit map, not an explicit solution.
+- Penalize complexity that buys solvability but removes the interactions the paper claims to
+  explain.
+
+Before recommending an idea, perform an analytical preflight:
+
+1. Name the central quantity expected to have an explicit expression: for example an invasion
+   threshold, critical point, phase boundary, stationary branch, stability boundary, or
+   scaling exponent.
+2. Show the reduction route and estimate the resulting algebraic degree or dimensionality.
+3. Classify the result as `closed_form`, `explicit_asymptotic`, `exact_implicit`, or
+   `numerical_only`.
+4. Count `closed_form` as passing. Count `explicit_asymptotic` only when the stated asymptotic
+   regime is itself central and scientifically sufficient. The other two classes fail the
+   default gate.
+
+Closed form may use standard named special functions when the target quantity is isolated and
+can be evaluated without solving a new implicit equation. Do not require every observable to
+be explicit; require the explicit result to support the central contribution.
 
 ## Theory potential
 
@@ -253,6 +349,10 @@ Attack every serious idea with:
 - Has the same mechanism been studied under another name?
 - Is the phenomenon predictable from existing theory?
 - Is model complexity necessary?
+- Was the model chosen to explain a scientific puzzle, or reverse-engineered to display the
+  desired phase diagram?
+- Which assumptions exist only to make the equations close?
+- Would the mechanism remain credible without the custom response function?
 - Can the new mechanism be ablated?
 - Does the result survive other network ensembles?
 - Is it based on one parameter point?
@@ -317,6 +417,16 @@ The nearest literature and precise overlap/difference.
 ### Why this is or is not A+B
 One explicit paragraph.
 
+### Naturalness Audit
+State whether the assumptions and response rules are micro-founded, minimally
+phenomenological, convenience-driven, or reverse-engineered. Separate technical validation
+from scientific motivation.
+
+### Four-Gate Audit
+Report PASS / REVISE for novelty, simplicity, surprise, and explicit analytics. For the
+explicit-analytics gate, name the target quantity and display the anticipated solution form or
+derivation route.
+
 ### Core mechanism
 What scientifically changes.
 
@@ -325,6 +435,10 @@ Clearly label as hypothesis, not fact.
 
 ### Theory potential
 What can plausibly be derived.
+
+### Tractability Reality Check
+Distinguish closed-form results, exact implicit equations, approximations, and numerical
+root-finding. State whether the available mathematics matches the user's intended paper.
 
 ### Kill Test
 The cheapest calculation or simulation that could kill the idea.
@@ -356,6 +470,9 @@ Never:
 - hide strong competing papers
 - reward parameter count
 - confuse complexity with depth
+- let extensive validation compensate for an unnatural research premise
+- call a finite nested sum an explicit threshold solution when its roots are only numerical
+- generalize beyond the declared model class without supporting evidence
 
 Separate:
 

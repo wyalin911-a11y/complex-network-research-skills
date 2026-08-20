@@ -92,6 +92,9 @@ For each candidate, identify the single most important limitation among:
 - novelty;
 - mechanistic depth;
 - theoretical tractability;
+- mechanism simplicity;
+- surprise not directly encoded by the rule;
+- explicit-solution readiness;
 - emergent-phenomenon potential;
 - prior-art collision;
 - falsifiability;
@@ -101,6 +104,13 @@ For each candidate, identify the single most important limitation among:
 - evidence quality.
 
 Do not hide a fatal weakness inside an average score.
+
+For this user's default portfolio, verify four upstream gates before approval: novelty,
+simplicity, surprise, and explicit analytics. The Research Taste artifact must name the
+central explicit quantity and classify its expected theory as `closed_form`,
+`explicit_asymptotic`, `exact_implicit`, or `numerical_only`. Return `REVISE` when the only
+available central result is implicit or numerical, unless the user explicitly relaxed this
+criterion before the decision run.
 
 ### 3. Run the Kill Test review
 
@@ -151,6 +161,10 @@ Use exactly one decision:
 
 An approval authorizes project initialization and research planning only. It does not
 authorize manuscript claims or paper writing.
+
+Under the default portfolio criteria, `APPROVE` additionally requires all four gates to pass.
+Do not trade a failure in simplicity or explicit analytics against high feasibility or a
+large amount of completed validation.
 
 ## State-transition contract
 
